@@ -1,8 +1,8 @@
-FROM golang:1.21-alpine as build
+FROM golang:1.22-alpine as build
 WORKDIR /app
 ADD go.mod ./
 RUN go mod download
-COPY *.go ./
+COPY . .
 RUN CGO_ENABLED=0 go build -o /usr/bin/app
 
 FROM gcr.io/distroless/static
