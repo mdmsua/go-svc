@@ -1,14 +1,15 @@
 FROM golang:1.22-alpine as build
 WORKDIR /app
-ADD go.mod ./
+COPY go.mod go.sum ./
 RUN go mod download
 COPY *.go ./
-RUN CGO_ENABLED=0 go build -o /usr/bin/app
+RUN CGO_ENABLED=0 GOOS=linux go build -o /usr/bin/app
 
 FROM gcr.io/distroless/static
 COPY --from=build /usr/bin/app /app
 USER nobody:nobody
-ENV TLS_CERT=""
-ENV TLS_KEY=""
-EXPOSE 8080
+ENV PORT=8080
+ENV GRPC=8081
+EXPOSE ${PORT}
+EXPOSE ${GRPC}
 ENTRYPOINT [ "./app" ]
