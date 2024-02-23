@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option go_package = "./svc";
+
+package grpc;
+
+service Service {
+    rpc GetData(google.protobuf.Empty) returns (Data) {}
+}
+
+message Data {
+    string name = 1;
+    string value = 2;
+}

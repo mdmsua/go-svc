@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v4.25.3
-// source: service.proto
+// source: protos/grpc.proto
 
-package __
+package svc
 
 import (
 	context "context"
@@ -20,7 +20,7 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Service_GetData_FullMethodName = "/services.Service/GetData"
+	Service_GetData_FullMethodName = "/grpc.Service/GetData"
 )
 
 // ServiceClient is the client API for Service service.
@@ -97,7 +97,7 @@ func _Service_GetData_Handler(srv interface{}, ctx context.Context, dec func(int
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Service_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "services.Service",
+	ServiceName: "grpc.Service",
 	HandlerType: (*ServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -106,5 +106,5 @@ var Service_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "service.proto",
+	Metadata: "protos/grpc.proto",
 }

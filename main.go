@@ -1,11 +1,9 @@
 package main
 
 import (
-	"client"
 	"flag"
 	"log"
 	"os"
-	"server"
 )
 
 func main() {
@@ -21,11 +19,11 @@ func main() {
 	switch os.Args[1] {
 	case "server":
 		serverFlagSet.Parse(os.Args[2:])
-		server := server.NewServer(*cert, *key, *port, *grpc)
+		server := NewServer(*cert, *key, *port, *grpc)
 		server.Run()
 	case "client":
 		clientFlagSet.Parse(os.Args[2:])
-		client := client.NewClient(*addr)
+		client := NewClient(*addr)
 		client.Run()
 	default:
 		log.Fatal("Invalid command")

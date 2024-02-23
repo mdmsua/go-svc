@@ -1,9 +1,9 @@
-package client
+package main
 
 import (
 	"context"
 	"log"
-	svc "main/services"
+	protos "main/protos"
 
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/types/known/emptypb"
@@ -27,12 +27,12 @@ func (c Client) Run() {
 
 	defer conn.Close()
 
-	client := svc.NewServiceClient(conn)
+	client := protos.NewServiceClient(conn)
 
 	data, err := client.GetData(context.Background(), &emptypb.Empty{})
 	if err != nil {
 		panic(err)
 	}
 
-	log.Printf("Timestamp: %v, Name: %s, Value: %s\n", data.Timestamp, data.Name, data.Value)
+	log.Printf("Name: %s, Value: %s\n", data.Name, data.Value)
 }

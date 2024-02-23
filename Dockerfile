@@ -2,7 +2,7 @@ FROM golang:1.22-alpine as build
 WORKDIR /app
 ADD go.mod ./
 RUN go mod download
-COPY . .
+COPY *.go ./
 RUN CGO_ENABLED=0 go build -o /usr/bin/app
 
 FROM gcr.io/distroless/static
