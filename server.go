@@ -10,8 +10,6 @@ import (
 	"net/http"
 	"os"
 
-	protos "main/protos"
-
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/types/known/emptypb"
 )
@@ -29,11 +27,11 @@ type Server struct {
 }
 
 type service struct {
-	protos.UnimplementedServiceServer
+	UnimplementedServiceServer
 }
 
-func (service *service) GetData(ctx context.Context, req *emptypb.Empty) (*protos.Data, error) {
-	return &protos.Data{
+func (service *service) GetData(ctx context.Context, req *emptypb.Empty) (*Data, error) {
+	return &Data{
 		Name:  getHostname(),
 		Value: "Hello World",
 	}, nil
@@ -97,7 +95,7 @@ func (s Server) Run() {
 	}
 
 	grpcServer := grpc.NewServer()
-	protos.RegisterServiceServer(grpcServer, &service{})
+	RegisterServiceServer(grpcServer, &service{})
 	go func() {
 		grpcServer.Serve(lis)
 	}()

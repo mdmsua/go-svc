@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"log"
-	protos "main/protos"
 
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/types/known/emptypb"
@@ -27,7 +26,7 @@ func (c Client) Run() {
 
 	defer conn.Close()
 
-	client := protos.NewServiceClient(conn)
+	client := NewServiceClient(conn)
 
 	data, err := client.GetData(context.Background(), &emptypb.Empty{})
 	if err != nil {
